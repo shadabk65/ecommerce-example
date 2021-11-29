@@ -194,3 +194,17 @@ color: #fff;
 padding: 13px;
 }
 }
+
+
+
+.sign_container{
+  border: 1px solid #fff;
+  border-radius: 2px;
+  padding: 40px;
+  box-shadow: 0px 0px 4px black;
+}
+
+.primary_color{
+  background-color: #87CEEB;
+}
+
