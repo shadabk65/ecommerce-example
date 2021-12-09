@@ -2,7 +2,7 @@ import React from 'react'
 import { Navbar, Nav, Container,NavDropdown} from 'react-bootstrap'
 import {useDispatch,useSelector} from 'react-redux'
 import {Link} from 'react-router-dom'
-import {logout} from '../redux/actions/LoginActions'
+import {logout} from '../redux/actions/UserActions'
 
 
 

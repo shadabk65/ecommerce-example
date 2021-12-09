@@ -4,7 +4,8 @@ import Loader from '../components/Loader'
 import Message from '../components/Message'
 import {Form, Button ,Container,Row, Col} from 'react-bootstrap'
 import {useDispatch , useSelector} from 'react-redux'
-import {ProfileDetailsActions} from '../redux/actions/ProfileDetailsActions'
+import {UserDetailsActions, UpdateUserProfileActions} from '../redux/actions/UserActions'
+import { USER_UPDATE_PROFILE_RESET } from '../redux/constants/UserConstant'
 
 
 
@@ -20,24 +21,29 @@ const ProfileScreen = ({history}) => {
     const dispatch = useDispatch()
   
    
-   const userDetails = useSelector(state=>state.userProfile)
+   const userDetails = useSelector(state=>state.userDetails)
    const {error,loading,user} = userDetails
 
-const userLogin = useSelector(state=>state.userLogin)
+   const userLogin = useSelector(state=>state.userLogin)
    const {userInfo} = userLogin
+   const {id} = userLogin
+
+   const userUpdateProfile = useSelector(state => state.userUpdateProfile)
+   const { success } = userUpdateProfile
 
    useEffect (()=>{
      if (!userInfo){
       history.push('/login')
      }else{
-      if(!user || user.name){
-        dispatch(ProfileDetailsActions('profile'))
+      if(!user || !user.name || success){
+        dispatch({ type: USER_UPDATE_PROFILE_RESET })
+        dispatch(UserDetailsActions('profile'))
       }else{
         setName(user.name)
-        setEmail(user.mail)
+        setEmail(user.email)
       }
      }
-   },[history,userInfo,dispatch,history])
+   },[dispatch, history, userInfo, user, success])
 
 
   const submitHandler = (e) =>{
@@ -45,10 +51,10 @@ const userLogin = useSelector(state=>state.userLogin)
     if (password != confirmpassword){
       setMessage("password do no match")
     }else{
-          
+       dispatch(UpdateUserProfileActions(id,name,email,password))   
 
     }
-     }
+  }
 
 
   return(

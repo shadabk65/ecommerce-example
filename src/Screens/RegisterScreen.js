@@ -4,7 +4,7 @@ import Loader from '../components/Loader'
 import Message from '../components/Message'
 import {Form, Button ,Row, Col} from 'react-bootstrap'
 import {useDispatch , useSelector} from 'react-redux'
-import {RegisterActions} from '../redux/actions/LoginActions'
+import {Register} from '../redux/actions/UserActions'
 import FormContainer from '../components/FormContainer'
 
 
@@ -35,7 +35,7 @@ const RegisterScreen = ({location, history}) => {
     if (password != confirmpassword){
       setMessage("password do no match")
     }else{
-          dispatch(RegisterActions(name,email,password))
+          dispatch(Register(name,email,password))
 
     }
       }
